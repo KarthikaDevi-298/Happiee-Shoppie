@@ -1,0 +1,22 @@
+package com.happieeshoppiee.controller;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000") // Connects to your React app
+public class OrderController {
+
+    @PostMapping("/checkout")
+    public ResponseEntity<?> processOrder(@RequestBody Map<String, Object> orderData) {
+        try {
+            // In a real app, you would save orderData to a Database here
+            System.out.println("Received order: " + orderData);
+            return ResponseEntity.ok(Map.of("message", "Order placed successfully!", "status", "success"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Order processing failed.");
+        }
+    }
+}
